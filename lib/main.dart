@@ -1,5 +1,5 @@
+import 'package:barcode_generator/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:toolbox/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
