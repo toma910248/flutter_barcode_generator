@@ -1,4 +1,4 @@
-# barcode_generator
+# Barcode generator
 
 A new Flutter project.
 
@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Generator or Update the .g files in lib/model
+
+```sh
+fvm dart run build_runner build --delete-conflicting-outputs
+```
+
+## Todo List
+ - [x] Storage
+ - [ ] Android widget
+ - [ ] Multiple codes
+ - [ ] QR Code
+

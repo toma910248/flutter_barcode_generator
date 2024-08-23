@@ -1,8 +1,19 @@
-import 'package:barcode_generator/pages/home_page.dart';
+import 'package:barcode_generator/provider/barcode_provider.dart';
+import 'package:barcode_generator/ui/barcode_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  final barcodeProvider = BarcodeProvider();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => barcodeProvider),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +43,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const HomePage(title: '載具'),
+      home: const BarcodePage(index: 0),
     );
   }
 }
