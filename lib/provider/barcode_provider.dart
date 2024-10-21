@@ -7,30 +7,39 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class BarcodeProvider extends ChangeNotifier {
   SharedPreferences? _sharedPreferences;
-  List<BarcodeItem> barcodeItems = [];
+  List<BarcodeItem> _barcodeItems = [];
 
-  Future<void> init() async {
+  BarcodeProvider() {
+    _init();
+  }
+
+  Future<void> _init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
 
     load();
+
+    if (_barcodeItems.isEmpty) {
+      _barcodeItems.add(BarcodeItem(BarcodeType.code39, 'NEW', "123456789"));
+      notifyListeners();
+    }
   }
 
-  Future<void> load() async {
-    final json = _sharedPreferences?.getString('barcode');
-    if (json != null) {
-      final barcodeData = BarcodeData.fromJson(jsonDecode(json));
-      barcodeItems = barcodeData.barcodeItems;
-    }
+  List<BarcodeItem> getAll() => List.unmodifiable(_barcodeItems);
 
-    if (barcodeItems.isEmpty) {
-      barcodeItems.add(BarcodeItem(BarcodeType.code39, 'NEW', "123456789"));
-    }
+  int getLength() => _barcodeItems.length;
+
+  BarcodeItem get(int index) => _barcodeItems[index];
+
+  Future<void> add(BarcodeItem item) async {
+    _barcodeItems.add(item);
+
+    await save();
 
     notifyListeners();
   }
 
-  Future<void> add(BarcodeItem item) async {
-    barcodeItems.add(item);
+  Future<void> remove(int index) async {
+    _barcodeItems.removeAt(index);
 
     await save();
 
@@ -38,16 +47,23 @@ class BarcodeProvider extends ChangeNotifier {
   }
 
   Future<void> update(int index, BarcodeItem item) async {
-    barcodeItems[index] = item;
+    _barcodeItems[index] = item;
 
     await save();
 
     notifyListeners();
   }
 
-  Future<void> save() async {
-    await _sharedPreferences?.setString('barcode', jsonEncode(BarcodeData(barcodeItems).toJson()));
+  Future<void> load() async {
+    final json = _sharedPreferences?.getString('barcode');
+    if (json != null) {
+      final barcodeData = BarcodeData.fromJson(jsonDecode(json));
+      _barcodeItems = barcodeData.barcodeItems;
+    }
+    notifyListeners();
   }
 
-  getByIndex(int index) {}
+  Future<void> save() async {
+    await _sharedPreferences?.setString('barcode', jsonEncode(BarcodeData(_barcodeItems).toJson()));
+  }
 }

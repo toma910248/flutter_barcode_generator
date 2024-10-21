@@ -3,13 +3,11 @@ import 'package:barcode_generator/ui/barcode_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  final barcodeProvider = BarcodeProvider();
-
+void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => barcodeProvider),
+        ChangeNotifierProvider(create: (BuildContext context) => BarcodeProvider()),
       ],
       child: const MyApp(),
     ),

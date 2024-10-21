@@ -25,7 +25,7 @@ class _BarcodeEditPageState extends State<BarcodeEditPage> {
     final index = widget.index;
     if (index != null) {
       final barcodeProvider = Provider.of<BarcodeProvider>(context, listen: false);
-      final barcodeItem = barcodeProvider.barcodeItems[index];
+      final barcodeItem = barcodeProvider.get(index);
       _barcodeType = barcodeItem.barcodeType;
       _controllerLabel.text = barcodeItem.label;
       _controllerData.text = barcodeItem.data;

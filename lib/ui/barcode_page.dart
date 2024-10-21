@@ -20,7 +20,6 @@ class _BarcodePageState extends State<BarcodePage> with RouteAware {
     super.initState();
 
     ScreenBrightness().setScreenBrightness(0.9);
-    Provider.of<BarcodeProvider>(context, listen: false).init();
   }
 
   @override
@@ -36,8 +35,8 @@ class _BarcodePageState extends State<BarcodePage> with RouteAware {
       Barcode barcode = Barcode.code39();
       String data = "";
 
-      if (barcodeProvider.barcodeItems.isNotEmpty) {
-        final item = barcodeProvider.barcodeItems[widget.index];
+      if (barcodeProvider.getLength() > widget.index) {
+        final item = barcodeProvider.get(widget.index);
         title = item.label;
         barcode = item.barcodeType.getBarcode;
         data = item.data;
