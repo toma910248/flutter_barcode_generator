@@ -49,12 +49,12 @@ class _BarcodePageState extends State<BarcodePage> with RouteAware {
           title: Text(title),
           actions: [IconButton(onPressed: _onEditTap, icon: const Icon(Icons.edit))],
         ),
-        body: Center(
+        body: SizedBox.expand(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(50.0),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300),
                 child: data.isNotEmpty ? BarcodeWidget(barcode: barcode, data: data) : const SizedBox.shrink(),
               ),
             ],
