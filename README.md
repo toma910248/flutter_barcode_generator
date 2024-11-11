@@ -24,6 +24,6 @@ fvm dart run build_runner build --delete-conflicting-outputs
 ## Todo List
  - [x] Storage
  - [ ] Android widget
- - [ ] Multiple codes
+ - [x] Multiple codes
  - [ ] QR Code
 

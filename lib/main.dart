@@ -1,4 +1,5 @@
 import 'package:barcode_generator/provider/barcode_provider.dart';
+import 'package:barcode_generator/ui/barcode_list_page.dart';
 import 'package:barcode_generator/ui/barcode_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const BarcodePage(index: 0),
+      home: const BarcodeListPage(),
     );
   }
 }
