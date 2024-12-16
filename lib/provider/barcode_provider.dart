@@ -19,7 +19,7 @@ class BarcodeProvider extends ChangeNotifier {
     load();
 
     if (_barcodeItems.isEmpty) {
-      _barcodeItems.add(BarcodeItem(BarcodeType.code39, 'NEW', "123456789"));
+      _barcodeItems.add(BarcodeItem(BarcodeTypeEnum.code39, 'NEW', "123456789"));
       notifyListeners();
     }
   }

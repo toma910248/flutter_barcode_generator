@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'barcode_item.g.dart';
 
-enum BarcodeType {
+enum BarcodeTypeEnum {
   code39('CODE 39');
 
-  const BarcodeType(this.value);
+  const BarcodeTypeEnum(this.value);
   final String value;
 
   Barcode get getBarcode => switch (this) {
@@ -18,7 +18,7 @@ enum BarcodeType {
 class BarcodeItem {
   BarcodeItem(this.barcodeType, this.label, this.data);
 
-  BarcodeType barcodeType;
+  BarcodeTypeEnum barcodeType;
 
   String data;
 

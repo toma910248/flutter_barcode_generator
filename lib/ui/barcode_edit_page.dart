@@ -16,7 +16,7 @@ class _BarcodeEditPageState extends State<BarcodeEditPage> {
   final _formKey = GlobalKey<FormState>();
   final _controllerLabel = TextEditingController();
   final _controllerData = TextEditingController();
-  BarcodeType _barcodeType = BarcodeType.code39;
+  BarcodeTypeEnum _barcodeType = BarcodeTypeEnum.code39;
 
   @override
   void initState() {
