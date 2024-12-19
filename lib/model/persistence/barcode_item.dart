@@ -1,5 +1,6 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:random_string/random_string.dart';
 
 part 'barcode_item.g.dart';
 
@@ -16,13 +17,16 @@ enum BarcodeTypeEnum {
 
 @JsonSerializable()
 class BarcodeItem {
-  BarcodeItem(this.barcodeType, this.label, this.data);
+  final String id;
 
   BarcodeTypeEnum barcodeType;
 
   String data;
 
   String label;
+
+  BarcodeItem({String? id, required this.barcodeType, required this.label, required this.data})
+      : id = id ?? randomAlphaNumeric(10);
 
   factory BarcodeItem.fromJson(Map<String, dynamic> json) => _$BarcodeItemFromJson(json);
 

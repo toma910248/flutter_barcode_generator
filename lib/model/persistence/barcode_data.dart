@@ -5,9 +5,9 @@ part 'barcode_data.g.dart';
 
 @JsonSerializable()
 class BarcodeData {
-  BarcodeData(this.barcodeItems);
-
   List<BarcodeItem> barcodeItems;
+
+  BarcodeData(this.barcodeItems);
 
   factory BarcodeData.fromJson(Map<String, dynamic> json) => _$BarcodeDataFromJson(json);
 

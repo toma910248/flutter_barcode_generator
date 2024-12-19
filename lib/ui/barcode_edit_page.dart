@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BarcodeEditPage extends StatefulWidget {
-  const BarcodeEditPage({super.key, this.index});
-
   final int? index;
 
+  const BarcodeEditPage({super.key, this.index});
   @override
   State<BarcodeEditPage> createState() => _BarcodeEditPageState();
 }
@@ -17,6 +16,7 @@ class _BarcodeEditPageState extends State<BarcodeEditPage> {
   final _controllerLabel = TextEditingController();
   final _controllerData = TextEditingController();
   BarcodeTypeEnum _barcodeType = BarcodeTypeEnum.code39;
+  String? _id;
 
   @override
   void initState() {
@@ -26,6 +26,7 @@ class _BarcodeEditPageState extends State<BarcodeEditPage> {
     if (index != null) {
       final barcodeProvider = Provider.of<BarcodeProvider>(context, listen: false);
       final barcodeItem = barcodeProvider.get(index);
+      _id = barcodeItem.id;
       _barcodeType = barcodeItem.barcodeType;
       _controllerLabel.text = barcodeItem.label;
       _controllerData.text = barcodeItem.data;
@@ -103,7 +104,12 @@ class _BarcodeEditPageState extends State<BarcodeEditPage> {
       _formKey.currentState!.save();
 
       var barcodeProvider = Provider.of<BarcodeProvider>(context, listen: false);
-      var barcodeItem = BarcodeItem(_barcodeType, _controllerLabel.text, _controllerData.text);
+      var barcodeItem = BarcodeItem(
+        id: _id,
+        barcodeType: _barcodeType,
+        label: _controllerLabel.text,
+        data: _controllerData.text,
+      );
       if (widget.index != null) {
         barcodeProvider.update(widget.index!, barcodeItem);
       } else {
