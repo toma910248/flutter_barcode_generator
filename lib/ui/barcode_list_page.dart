@@ -1,7 +1,7 @@
 import 'package:barcode_generator/model/persistence/barcode_item.dart';
 import 'package:barcode_generator/provider/barcode_provider.dart';
 import 'package:barcode_generator/ui/barcode_edit_page.dart';
-import 'package:barcode_generator/ui/barcode_page.dart';
+import 'package:barcode_generator/ui/barcode_item_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -72,7 +72,7 @@ class _BarcodeListPageState extends State<BarcodeListPage> {
 
   _onItemTap(int index) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => BarcodePage(index: index),
+      builder: (context) => BarcodeItemPage(index: index),
     ));
   }
 

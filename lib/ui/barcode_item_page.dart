@@ -1,20 +1,21 @@
 import 'package:barcode_generator/provider/barcode_provider.dart';
 import 'package:barcode_generator/ui/barcode_edit_page.dart';
+import 'package:barcode_generator/ui/widgets/barcode_view.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
-class BarcodePage extends StatefulWidget {
-  const BarcodePage({super.key, required this.index});
+class BarcodeItemPage extends StatefulWidget {
+  const BarcodeItemPage({super.key, required this.index});
 
   final int index;
 
   @override
-  State<BarcodePage> createState() => _BarcodePageState();
+  State<BarcodeItemPage> createState() => _BarcodeItemPageState();
 }
 
-class _BarcodePageState extends State<BarcodePage> with RouteAware {
+class _BarcodeItemPageState extends State<BarcodeItemPage> with RouteAware {
   @override
   void initState() {
     super.initState();
@@ -48,17 +49,7 @@ class _BarcodePageState extends State<BarcodePage> with RouteAware {
           title: Text(title),
           actions: [IconButton(onPressed: _onEditTap, icon: const Icon(Icons.edit))],
         ),
-        body: SizedBox.expand(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 300),
-                child: data.isNotEmpty ? BarcodeWidget(barcode: barcode, data: data) : const SizedBox.shrink(),
-              ),
-            ],
-          ),
-        ),
+        body: BarcodeView(data: data, barcode: barcode),
       );
     });
   }

@@ -1,6 +1,6 @@
 import 'package:barcode_generator/provider/barcode_provider.dart';
 import 'package:barcode_generator/ui/barcode_list_page.dart';
-import 'package:barcode_generator/ui/barcode_page.dart';
+import 'package:barcode_generator/ui/barcode_item_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
