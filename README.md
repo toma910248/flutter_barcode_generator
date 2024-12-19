@@ -23,7 +23,10 @@ fvm dart run build_runner build --delete-conflicting-outputs
 
 ## Todo List
  - [x] Storage
- - [ ] Android widget
+ - [x] Android shortcut
  - [x] Multiple codes
  - [ ] QR Code
 
+## Issue List
+
+- [Android Shortcut limitations](https://developer.android.com/develop/ui/views/launch/shortcuts?hl=en#shortcut-limitations)

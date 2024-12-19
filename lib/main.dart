@@ -1,7 +1,9 @@
+import 'package:barcode_generator/model/persistence/barcode_item.dart';
 import 'package:barcode_generator/provider/barcode_provider.dart';
 import 'package:barcode_generator/ui/barcode_list_page.dart';
-import 'package:barcode_generator/ui/barcode_item_page.dart';
+import 'package:barcode_generator/ui/barcode_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shortcuts/flutter_shortcuts.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -15,14 +17,44 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final FlutterShortcuts _flutterShortcuts = FlutterShortcuts();
+  BarcodePage? _actionBarcodePage;
+
+  @override
+  void initState() {
+    super.initState();
+    _flutterShortcuts.initialize(debug: false);
+    _flutterShortcuts.listenAction((String incomingAction) {
+      final uri = Uri.parse(incomingAction);
+      final label = uri.queryParameters['label'];
+      final barcodeType = uri.queryParameters['barcodeType'];
+      final data = uri.queryParameters['data'];
+
+      if (label != null && barcodeType != null && data != null) {
+        setState(() {
+          final type = BarcodeTypeEnum.values.firstWhere((element) => element.value == barcodeType);
+          _actionBarcodePage = BarcodePage(
+            title: label,
+            barcode: type.getBarcode,
+            date: data,
+          );
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Barcode Generator',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -42,7 +74,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const BarcodeListPage(),
+      home: _actionBarcodePage ?? const BarcodeListPage(),
     );
   }
 }
